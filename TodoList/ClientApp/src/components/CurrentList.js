@@ -1,3 +1,3 @@
 ﻿export function CurrentList() {
-    return <h1>Hello wold</h1>;
+    return <h1>Hello world!</h1>;
 }
