@@ -1,4 +1,6 @@
 using Microsoft.OpenApi.Models;
+using TodoList.Data;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -28,7 +30,12 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
+
+
 var app = builder.Build();
+
+var connectionString = builder.Configuration.GetConnectionString("AppDb");
+builder.Services.AddDbContext<TaskContext>(x => x.UseSqlServer(connectionString));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
