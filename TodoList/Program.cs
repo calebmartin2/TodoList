@@ -1,5 +1,6 @@
 using Microsoft.OpenApi.Models;
 using TodoList.Data;
+using TodoList.TaskService;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,11 +32,13 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 
+var connectionString = builder.Configuration.GetConnectionString("AppDb");
+builder.Services.AddDbContext<TaskContext>(x => x.UseSqlServer(connectionString));
+builder.Services.AddScoped<ITaskService, TaskService>();
 
 var app = builder.Build();
 
-var connectionString = builder.Configuration.GetConnectionString("AppDb");
-builder.Services.AddDbContext<TaskContext>(x => x.UseSqlServer(connectionString));
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -4,10 +4,16 @@ namespace TodoList.Data
 {
     public class TaskContext : DbContext
     {
+        public TaskContext()
+        {
+
+        }
         public TaskContext(DbContextOptions<TaskContext> options) : base(options)
         {
 
         }
+
+
         public DbSet<User> Users { get; set; }
         public DbSet<Models.Task> Tasks { get; set; }
 
