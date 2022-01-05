@@ -15,7 +15,7 @@ namespace TodoList.Data
 
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Models.Task> Tasks { get; set; }
+        public DbSet<TaskItem> Tasks { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
