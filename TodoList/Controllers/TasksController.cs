@@ -18,7 +18,7 @@ namespace TodoList.Controllers
 
         [HttpGet]
         [Route("api/GetAllTasks")]
-        public IEnumerable<Models.Task> GetAllTasks()
+        public IEnumerable<TaskItem> GetAllTasks()
         {
             return _taskService.GetAllTasks();
         }
@@ -26,10 +26,23 @@ namespace TodoList.Controllers
         [HttpGet]
         [Route("api/GetTaskById")]
 
-        public Models.Task GetTaskById(int id)
+        public TaskItem GetTaskById(int id)
         {
             return _taskService.GetTaskById(id);
         }
+
+        [HttpPost]
+        [Route("api/AddTask")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        public IActionResult AddTask(TaskItem taskitem)
+
+        {
+            taskitem.CreatedDate = DateTime.Now;
+            taskitem.IsCompleted = false;
+            TaskItem retTask = _taskService.AddTask(taskitem);
+            return CreatedAtAction(nameof(GetTaskById), new { id = retTask.ID }, taskitem);
+        }
+
 
     }
 }

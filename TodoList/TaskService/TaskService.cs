@@ -12,18 +12,29 @@ namespace TodoList.TaskService
         {
             _taskContext = taskDbContext;
         }
-        public List<Models.Task> GetAllTasks()
+        public List<TaskItem> GetAllTasks()
         {
             return _taskContext.Tasks.ToList();
         }
-        public Models.Task GetTaskById(int Id)
+        public TaskItem GetTaskById(int Id)
         {
-            Models.Task retval = _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
-            if (retval == null)
+            return _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
+        }
+        public void DeleteTaskById(int Id)
+        {
+            var task = _taskContext.Tasks.FirstOrDefault(x =>x.ID == Id);
+            if (task != null)
             {
-                retval = new Models.Task();
+                _taskContext.Remove(task);
+                _taskContext.SaveChanges();
             }
-            return retval;
+        }
+        public TaskItem AddTask(TaskItem taskitem)
+        {
+            _taskContext.Tasks.Add(taskitem);
+            _taskContext.SaveChanges();
+            return taskitem;
         }
     }
+
 }
