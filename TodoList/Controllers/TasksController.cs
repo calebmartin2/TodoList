@@ -14,24 +14,20 @@ namespace TodoList.Controllers
             _taskService = taskService;
         }
 
-        [HttpGet]
-        [Route("api/GetAllTasks")]
+        [HttpGet, Route("api/GetAllTasks")]
         public IEnumerable<TaskItem> GetAllTasks()
         {
             return _taskService.GetAllTasks();
         }
 
-        [HttpGet]
-        [Route("api/GetTaskById")]
+        [HttpGet, Route("api/GetTaskById")]
 
         public TaskItem GetTaskById(int id)
         {
             return _taskService.GetTaskById(id);
         }
 
-        [HttpPost]
-        [Route("api/AddTask")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [HttpPost, Route("api/AddTask"), ProducesResponseType(StatusCodes.Status201Created)]
         public IActionResult AddTask(TaskItem taskitem)
 
         {
@@ -41,8 +37,7 @@ namespace TodoList.Controllers
             return CreatedAtAction(nameof(GetTaskById), new { id = retTask.ID }, taskitem);
         }
 
-        [HttpPost]
-        [Route("api/DeleteTaskById")]
+        [HttpPost, Route("api/DeleteTaskById")]
 
         public IActionResult DeleteTaskById(int id)
         {
