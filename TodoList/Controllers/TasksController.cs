@@ -5,10 +5,8 @@ using TodoList.TaskService;
 using TodoList.Models;
 namespace TodoList.Controllers
 {
-
     public class TasksController : ControllerBase
     {
-      
 
         private readonly ITaskService _taskService;
         public TasksController(ITaskService taskService)
@@ -43,6 +41,37 @@ namespace TodoList.Controllers
             return CreatedAtAction(nameof(GetTaskById), new { id = retTask.ID }, taskitem);
         }
 
+        [HttpPost]
+        [Route("api/DeleteTaskById")]
 
+        public IActionResult DeleteTaskById(int id)
+        {
+            var exisitingTaskItem = _taskService.GetTaskById(id);
+
+            if (exisitingTaskItem != null)
+            {
+                _taskService.DeleteTaskById(id);
+                return Ok();
+            }
+            return NotFound($"Task Item Not Found with ID: {id}");
+        }
+
+        [HttpPost, Route("api/EditTask")]
+
+        public IActionResult EditTask(TaskItem taskitem)
+        {
+            if (taskitem.ID == 0)
+            {
+                return BadRequest($"Cannot edit task of ID: 0");
+            }
+            var existingTask = _taskService.GetTaskById(taskitem.ID);
+            if (existingTask != null)
+            {
+                _taskService.EditTask(taskitem);
+                return Ok();
+            }
+            return NotFound($"Task Item Not Found with ID: {taskitem.ID}");
+
+        }
     }
 }
