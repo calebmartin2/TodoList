@@ -35,6 +35,12 @@ namespace TodoList.TaskService
             _taskContext.SaveChanges();
             return taskitem;
         }
+
+        public void EditTask(TaskItem taskitem)
+        {
+            _taskContext.Tasks.Update(taskitem);
+            _taskContext.SaveChanges();
+        }
     }
 
 }
