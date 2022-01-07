@@ -20,6 +20,14 @@ namespace TodoList.TaskService
         {
             return _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
         }
+        public List<TaskItem> GetCompletedTasks()
+        {
+            return _taskContext.Tasks.Where(x => x.IsCompleted == true).ToList();
+        }
+        public List<TaskItem> GetCurrentTasks()
+        {
+            return _taskContext.Tasks.Where(x => x.IsCompleted == false).ToList();
+        }
         public void DeleteTaskById(int Id)
         {
             var task = _taskContext.Tasks.FirstOrDefault(x =>x.ID == Id);

@@ -36,6 +36,8 @@ var connectionString = builder.Configuration.GetConnectionString("AppDb");
 builder.Services.AddDbContext<TaskContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddScoped<ITaskService, TaskService>();
 
+
+
 var app = builder.Build();
 
 

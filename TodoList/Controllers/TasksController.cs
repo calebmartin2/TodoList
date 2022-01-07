@@ -27,6 +27,19 @@ namespace TodoList.Controllers
             return _taskService.GetTaskById(id);
         }
 
+        [HttpGet, Route("api/GetCompletedTasks")]
+        public IEnumerable<TaskItem> GetCompletedTasks()
+        {
+            return _taskService.GetCompletedTasks();
+        }
+
+        [HttpGet, Route("api/GetCurrentTasks")]
+        public IEnumerable<TaskItem> GetCurrentTasks()
+        {
+            return _taskService.GetCurrentTasks();
+        }
+
+
         [HttpPost, Route("api/AddTask"), ProducesResponseType(StatusCodes.Status201Created)]
         public IActionResult AddTask(TaskItem taskitem)
 
