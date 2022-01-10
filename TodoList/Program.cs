@@ -36,11 +36,18 @@ var connectionString = builder.Configuration.GetConnectionString("AppDb");
 builder.Services.AddDbContext<TaskContext>(x => x.UseSqlServer(connectionString));
 builder.Services.AddScoped<ITaskService, TaskService>();
 
-
+builder.Services.AddCors(o => o.AddPolicy("LowCorsPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
 
 var app = builder.Build();
 
-
+app.UseCors("LowCorsPolicy");
+app.UseHttpsRedirection();
+app.UseRouting();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
