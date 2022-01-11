@@ -1,11 +1,11 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'
 import TaskCard from './TaskCard'
 import {Button} from 'react-bootstrap'
-export function CurrentTasks() {
+export function CompletedTasks() {
     const [TaskItems, setTaskItems] = useState([]);
     async function fetchTasks() {
-        axios.get('./api/GetCurrentTasks')
+        axios.get('./api/GetCompletedTasks')
             .then(function (response) {
                 console.log(response.data);
                 const data = response.data;
@@ -21,10 +21,9 @@ export function CurrentTasks() {
 
     return (
         <div>
-            <h1>My Tasks:</h1>
-            <Button variant="success">Add Task</Button>
+            <h1>Completed Tasks:</h1>
             {TaskItems.map((task) => (
-                <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} mode="current"></TaskCard>
+                <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} mode="completed"></TaskCard>
             ))}
 
         </div>

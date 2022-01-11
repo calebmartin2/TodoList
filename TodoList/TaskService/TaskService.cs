@@ -54,6 +54,7 @@ namespace TodoList.TaskService
             var task = _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
             if (task != null)
             {
+                task.CompletedDate = DateTime.Now;
                 task.IsCompleted = true;
             }
             _taskContext.SaveChanges();
@@ -64,6 +65,7 @@ namespace TodoList.TaskService
             var task = _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
             if (task != null)
             {
+                task.CompletedDate = null;
                 task.IsCompleted = false;
             }
             _taskContext.SaveChanges();

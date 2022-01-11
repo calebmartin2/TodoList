@@ -19,6 +19,10 @@ export function NavMenu() {
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/">Current Tasks</NavLink>
                                 </NavItem>
+                                <NavItem>
+                                <NavLink tag={Link} className="text-dark" to="/completed">Completed Tasks</NavLink>
+                                </NavItem>
+
                             </ul>
                         </Collapse>
                     </Container>
