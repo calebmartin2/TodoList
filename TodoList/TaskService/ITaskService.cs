@@ -8,8 +8,10 @@
         List<TaskItem> GetAllTasks();
         List<TaskItem> GetCompletedTasks();
         List<TaskItem> GetCurrentTasks();
-        void DeleteTaskById(int id);
+        void DeleteTaskById(int Id);
         void EditTask(TaskItem taskitem);
-        TaskItem GetTaskById(int id);
+        TaskItem GetTaskById(int Id);
+
+        void CompleteTaskById(int Id);
     }
 }

@@ -81,5 +81,12 @@ namespace TodoList.Controllers
             return NotFound($"Task Item Not Found with ID: {taskitem.ID}");
 
         }
+
+        [HttpPost, Route("api/CompleteTaskById")]
+        public IActionResult CompleteTaskById(int id)
+        {
+            _taskService.CompleteTaskById(id);
+            return Ok();
+        }
     }
 }

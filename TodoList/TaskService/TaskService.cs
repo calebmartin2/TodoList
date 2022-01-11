@@ -49,6 +49,16 @@ namespace TodoList.TaskService
             _taskContext.Tasks.Update(taskitem);
             _taskContext.SaveChanges();
         }
+        public void CompleteTaskById(int Id)
+        {
+            var task = _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
+            if (task != null)
+            {
+                task.IsCompleted = true;
+            }
+            //_taskContext.Attach(newTask);
+            _taskContext.SaveChanges();
+        }
     }
 
 }
