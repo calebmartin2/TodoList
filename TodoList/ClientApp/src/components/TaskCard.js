@@ -47,6 +47,22 @@ function TaskCard(props) {
             });
     }
 
+    function edit() {
+        const dataForm = new FormData();
+        dataForm.append('id', props.task.id)
+        dataForm.append('Title', title)
+        dataForm.append('Description', description)
+        axios.post('http://localhost:5000/api/EditTask', dataForm)
+            .then(function (response) {
+                console.log(response.data);
+                props.refreshTasks();
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        setMode("current")
+    }
+
     return (
         <div>
             <Card style={{ marginBottom: '1em' }}>
@@ -64,7 +80,7 @@ function TaskCard(props) {
                                     <Form.Control type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
                                 </Form.Group>
                             </Form>
-                            <Button variant="success" style={{ marginRight: '.5em' }} onClick={() => setMode("current")}>Save</Button>
+                            <Button variant="success" style={{ marginRight: '.5em' }} onClick={() => edit()}>Save</Button>
                             <Button variant="danger" style={{ marginRight: '.5em' }} onClick={() => setMode("current")}>Cancel</Button>
                         </Fragment>
                     }
