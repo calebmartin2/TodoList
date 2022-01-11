@@ -11,7 +11,8 @@
         void DeleteTaskById(int Id);
         void EditTask(TaskItem taskitem);
         TaskItem GetTaskById(int Id);
-
         void CompleteTaskById(int Id);
+        void UndoCompleteTaskById(int Id);
+
     }
 }

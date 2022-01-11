@@ -88,5 +88,12 @@ namespace TodoList.Controllers
             _taskService.CompleteTaskById(id);
             return Ok();
         }
+
+        [HttpPost, Route("api/UndoCompleteTaskById")]
+        public IActionResult UndoCompleteTaskById(int id)
+        {
+            _taskService.UndoCompleteTaskById(id);
+            return Ok();
+        }
     }
 }

@@ -56,7 +56,16 @@ namespace TodoList.TaskService
             {
                 task.IsCompleted = true;
             }
-            //_taskContext.Attach(newTask);
+            _taskContext.SaveChanges();
+        }
+
+        public void UndoCompleteTaskById(int Id)
+        {
+            var task = _taskContext.Tasks.FirstOrDefault(x => x.ID == Id);
+            if (task != null)
+            {
+                task.IsCompleted = false;
+            }
             _taskContext.SaveChanges();
         }
     }
