@@ -9,7 +9,7 @@ function AddTask(props) {
     const [description, setDescription] = useState("")
 
     function add() {
-        if (title === "" || title === null) {
+        if (title === "" || title === null || description === "" || description == null) {
             window.alert("Input cannot be blank.");
         } else {
             const dataForm = new FormData();
