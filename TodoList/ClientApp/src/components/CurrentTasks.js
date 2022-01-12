@@ -4,25 +4,14 @@ import TaskCard from './TaskCard'
 import AddTask from './AddTask'
 export function CurrentTasks() {
     const [TaskItems, setTaskItems] = useState([]);
-
-    /*    async function fetchTasks() {
-            axios.get('./api/GetCurrentTasks')
-                .then(function (response) {
-                    console.log(response.data);
-                    const data = response.data;
-                    setTaskItems(data);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });*/
-
-
-    //}
+    const [loading, setLoading] = useState(false);
 
     const fetchTasks = async () => {
+
         try {
             const res = await axios.get('./api/GetCurrentTasks');
             setTaskItems(res.data);
+            setLoading(false);
         }
         catch (error) {
             console.log(error);
@@ -30,18 +19,22 @@ export function CurrentTasks() {
     }
 
     useEffect(() => {
+        setLoading(true);
         fetchTasks();
     }, [])
 
+
+
     return (
         <div>
-
             <AddTask refreshTasks={fetchTasks}></AddTask>
-
             <h1>My Tasks:</h1>
-            {TaskItems.map((task) => (
-                <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} mode="current"></TaskCard>
-            ))}
+            {loading
+                ? <h2>Loading...</h2>
+                : TaskItems.map((task) => (
+                    <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} mode="current"></TaskCard>
+                ))
+            }
 
         </div>
     );
