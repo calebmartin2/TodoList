@@ -40,7 +40,7 @@ export function CurrentTasks() {
 
             <h1>My Tasks:</h1>
             {TaskItems.map((task) => (
-                <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} loading={loading} mode="current"></TaskCard>
+                <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} mode="current"></TaskCard>
             ))}
 
         </div>
