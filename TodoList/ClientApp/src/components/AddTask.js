@@ -32,12 +32,12 @@ function AddTask(props) {
     return (
         <div>
             <Form>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" controlId="formBasicTitle">
                     <Form.Label>Title</Form.Label>
                     <Form.Control type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" controlId="formBasicDescription">
                     <Form.Label>Description</Form.Label>
                     <Form.Control type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
                 </Form.Group>
