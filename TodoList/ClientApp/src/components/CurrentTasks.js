@@ -19,6 +19,7 @@ export function CurrentTasks() {
     }
 
     useEffect(() => {
+        document.title = "Current Tasks";
         setLoading(true);
         fetchTasks();
     }, [])

@@ -20,6 +20,7 @@ export function CompletedTasks() {
             });
     }
     useEffect(() => {
+        document.title = "Completed Tasks";
         setLoading(true);
         fetchTasks();
     }, [])
