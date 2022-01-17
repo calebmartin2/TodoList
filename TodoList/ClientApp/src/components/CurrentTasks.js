@@ -2,9 +2,12 @@
 import axios from 'axios'
 import TaskCard from './TaskCard'
 import AddTask from './AddTask'
+import Pagination from './Pagination';
 export function CurrentTasks() {
     const [TaskItems, setTaskItems] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [tasksPerPage] = useState(3);
 
     const fetchTasks = async () => {
 
@@ -24,6 +27,12 @@ export function CurrentTasks() {
         fetchTasks();
     }, [])
 
+    const indexOfLastTask = currentPage * tasksPerPage;
+    const indexOfFirstTask = indexOfLastTask - tasksPerPage;
+    const currentTasks = TaskItems.slice(indexOfFirstTask, indexOfLastTask);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
 
 
     return (
@@ -32,10 +41,12 @@ export function CurrentTasks() {
             <h1>My Tasks:</h1>
             {loading
                 ? <h2>Loading...</h2>
-                : TaskItems.map((task) => (
+                : currentTasks.map((task) => (
                     <TaskCard key={task.id} task={task} refreshTasks={fetchTasks} mode="current"></TaskCard>
                 ))
             }
+
+            <Pagination tasksPerPage={tasksPerPage} totalTasks={TaskItems.length} paginate={paginate} />
 
         </div>
     );
